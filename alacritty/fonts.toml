@@ -1,0 +1,39 @@
+# Font configuration
+
+[font.normal]
+# Normal (roman) font face
+family = "JetBrainsMono Nerd Font Mono"
+style = "Regular"
+
+# Uncomment and configure the following sections if you want to specify bold, italic, or bold italic fonts.
+
+#[font.bold]
+#family = "monospace"
+#style = "Bold"
+
+#[font.italic]
+#family = "monospace"
+#style = "Italic"
+
+#[font.bold_italic]
+#family = "monospace"
+#style = "Bold Italic"
+
+# Point size
+#size = 13.0
+
+#[font.offset]
+#x = 0
+#y = 0
+
+#[font.glyph_offset]
+#x = 0
+#y = 0
+
+# Thin stroke font rendering (macOS only)
+#use_thin_strokes = true
+
+# Use built-in font for box drawing characters.
+#builtin_box_drawing = true
+
+# If `true`, bold text is drawn using the bright color variants.
