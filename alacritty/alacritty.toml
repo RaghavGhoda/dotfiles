@@ -1,6 +1,7 @@
 import = [
   "~/.config/alacritty/colors.toml",
-  "~/.config/alacritty/fonts.toml"
+  "~/.config/alacritty/fonts.toml",
+  "~/.config/alacritty/keybinds.toml"
 ]
 
 [env]
@@ -19,69 +20,3 @@ WINIT_X11_SCALE_FACTOR = "1.0"
 [cursor]
   [cursor.style]
   shape = "Block"
-
-# Keyboard bindings
-[[keyboard.bindings]]
-key = "C"
-mods = "Control|Shift"
-action = "Copy"
-
-[[keyboard.bindings]]
-key = "V"
-mods = "Control|Shift"
-action = "Paste"
-
-[[keyboard.bindings]]
-key = "T"
-mods = "Control|Shift"
-command = { program = "alacritty", args = [] }
-
-[[keyboard.bindings]]
-key = "Q"
-mods = "Control|Shift"
-action = "Quit"
-
-[[keyboard.bindings]]
-key = "Equals"
-mods = "Control"
-action = "IncreaseFontSize"
-
-[[keyboard.bindings]]
-key = "Minus"
-mods = "Control"
-action = "DecreaseFontSize"
-
-[[keyboard.bindings]]
-key = "0"
-mods = "Control"
-action = "ResetFontSize"
-
-[[keyboard.bindings]]
-key = "K"
-mods = "Control|Shift"
-action = "ScrollPageUp"
-
-[[keyboard.bindings]]
-key = "J"
-mods = "Control|Shift"
-action = "ScrollPageDown"
-
-[[keyboard.bindings]]
-key = "F11"
-action = "ToggleFullscreen"
-
-[[keyboard.bindings]]
-key = "F"
-mods = "Control|Shift"
-action = "SearchForward"
-
-[[keyboard.bindings]]
-key = "B"
-mods = "Control|Shift"
-action = "SearchBackward"
-
-[[keyboard.bindings]]
-key = "Space"
-mods = "Control"
-action = "ToggleViMode"
-
