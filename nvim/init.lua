@@ -1,5 +1,3 @@
--- init.lua
-
 -- Add lazy.nvim to runtime path
 vim.opt.rtp:prepend(vim.fn.stdpath('data') .. '/lazy/lazy.nvim')
 
@@ -11,16 +9,15 @@ require('lazy').setup({
         'hrsh7th/cmp-nvim-lsp', -- LSP completion source
         'nvim-treesitter/nvim-treesitter', -- Treesitter for syntax highlighting
         'rust-lang/rust.vim', -- Rust syntax highlighting
-	'ray-x/go.nvim',
+        'ray-x/go.nvim', -- Go setup
         'leafgarland/typescript-vim', -- TypeScript support
+        'leafOfTree/vim-svelte-plugin', -- Svelte syntax highlighting
+        'jose-elias-alvarez/null-ls.nvim', -- Formatting and linting
+        'nvim-lua/plenary.nvim', -- Dependency for Telescope and other plugins
     },
-    -- Fuzzy Finder
-    'nvim-telescope/telescope.nvim',
-    'nvim-lua/plenary.nvim',
-    -- Rosepine theme
-    { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 },
-    -- Autopairs plugin
-    'windwp/nvim-autopairs',
+    'nvim-telescope/telescope.nvim', -- Fuzzy finder
+    { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 }, -- Color scheme
+    'windwp/nvim-autopairs', -- Autopairs for brackets
 })
 
 -- Set the leader key to space
@@ -30,11 +27,40 @@ vim.g.mapleader = ' '
 vim.wo.number = true
 vim.wo.relativenumber = true
 
+-- Set tab to 2 spaces
+vim.opt.shiftwidth = 2
+vim.opt.tabstop = 2
+vim.opt.expandtab = true
+
 -- LSP configuration
 local lspconfig = require('lspconfig')
+
+-- Rust
 lspconfig.rust_analyzer.setup{}
-lspconfig.gopls.setup{}
+
+-- Golang
+require("go").setup({
+    lsp_cfg = true, -- Use LSP configuration from go.nvim
+})
+
+-- JavaScript/TypeScript
 lspconfig.tsserver.setup{}
+
+-- Svelte
+lspconfig.svelte.setup{}
+
+-- Null-LS for formatting
+local null_ls = require("null-ls")
+null_ls.setup({
+    sources = {
+        null_ls.builtins.formatting.prettier.with({
+            filetypes = { "javascript", "typescript", "svelte", "html", "css", "json" },
+        }),
+        null_ls.builtins.diagnostics.eslint.with({
+            filetypes = { "javascript", "typescript", "svelte" },
+        }),
+    },
+})
 
 -- Autocompletion configuration
 local cmp = require('cmp')
@@ -51,10 +77,9 @@ cmp.setup({
     }),
 })
 
-
 -- Treesitter configuration
 require('nvim-treesitter.configs').setup({
-    ensure_installed = { 'rust', 'go', 'typescript' },
+    ensure_installed = { 'rust', 'go', 'typescript', 'svelte', 'javascript', 'html', 'css' },
     highlight = {
         enable = true,
     },
@@ -63,9 +88,8 @@ require('nvim-treesitter.configs').setup({
 -- Fuzzy Finder configuration
 require('telescope').setup{}
 
--- Set Rosepine as the color scheme
+-- Set Moonfly as the color scheme
 vim.cmd [[colorscheme moonfly]]
-
 
 -- Autopairs configuration
 require('nvim-autopairs').setup{}
@@ -76,7 +100,3 @@ vim.api.nvim_set_keymap('n', '<Leader>fg', ':Telescope live_grep<CR>', { noremap
 vim.api.nvim_set_keymap('n', '<Leader>fb', ':Telescope buffers<CR>', { noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', '<Leader>fh', ':Telescope help_tags<CR>', { noremap = true, silent = true })
 
-
-config = function()
-    require("go").setup()
-  end
