@@ -18,10 +18,18 @@ require('lazy').setup({
     'nvim-telescope/telescope.nvim', -- Fuzzy finder
     { "bluz71/vim-moonfly-colors", name = "moonfly", lazy = false, priority = 1000 }, -- Color scheme
     'windwp/nvim-autopairs', -- Autopairs for brackets
+     {
+      "supermaven-inc/supermaven-nvim",
+      config = function()
+        require("supermaven-nvim").setup({})
+      end,
+    },
 })
 
 -- Set the leader key to space
 vim.g.mapleader = ' '
+
+vim.opt.clipboard = "unnamedplus"
 
 -- Enable line numbers
 vim.wo.number = true
@@ -60,6 +68,13 @@ null_ls.setup({
             filetypes = { "javascript", "typescript", "svelte" },
         }),
     },
+})
+
+-- Format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+    callback = function()
+        vim.lsp.buf.format({ async = false })
+    end,
 })
 
 -- Autocompletion configuration
